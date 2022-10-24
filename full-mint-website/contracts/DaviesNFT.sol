@@ -40,7 +40,7 @@ contract DaviesNFT is ERC721, Ownable {
         require(_exists(tokenId_), "Token does not exist!");
         return
             string(
-                abi.encodedPacked(
+                abi.encodePacked(
                     baseTokenUri,
                     Strings.toString(tokenId_),
                     ".json"
@@ -59,7 +59,7 @@ contract DaviesNFT is ERC721, Ownable {
     //mint function
     function mint(uint256 quantity_) public payable {
         require(isMintEnabled, "Minting not enabled");
-        require(msg.sender == quantity_ * mintPrice, "Not enough ETH");
+        require(msg.value == quantity_ * mintPrice, "Not enough ETH");
         require(totalMinting + quantity_ <= maxSupply, "sold out");
         require(
             walletToNumMints[msg.sender] + quantity_ <= maxPerWallet,
