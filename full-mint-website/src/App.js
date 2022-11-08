@@ -1,7 +1,21 @@
+import { useState } from "react";
 import "./App.css";
+import MainMint from "./MainMint";
+import NavBar from "./NavBar";
 
 function App() {
-  return <div className="App"></div>;
+  const [accounts, setAccounts] = useState([]);
+
+  return (
+    <div className="overlay">
+      <div className="App">
+        {/* Allowing NavBar and MainMint components access to accounts and setAccounts */}
+        <NavBar accounts={accounts} setAccounts={setAccounts} />
+        <MainMint accounts={accounts} setAccounts={setAccounts} />
+      </div>
+      <div className="moving-bg"></div>
+    </div>
+  );
 }
 
 export default App;
